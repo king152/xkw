@@ -22,7 +22,7 @@ class Mytest(unittest.TestCase):
         homePage.login()
         pagetitle=xkwBaseUtil.get_page_title()
         try:
-            self.assertEqual(u'学科网-账号安全验证',pagetitle)
+            self.assertEqual(u'学科网-海量中小学教育资源共享平台、权威教学资源门户网站！',pagetitle)
         except Exception as e:
             xkwBaseUtil.get_screenshot()
             print(e)
