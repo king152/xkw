@@ -48,9 +48,18 @@ class Creatdirectory:
             #print("删除成功")
         except Exception as e:
             print(e)
+            
+    #Gets the file name of the specified directory
+    def get_dir_filename(self):
+        filelists=[]
+        filelist = []
+        try:
+            filelists=os.listdir(self.deletefiledir)
+            filelist = filelists[0].split('.')
+            return filelist[0]
+        except Exception as e:
+            print(e)
 
 creatdirectory=Creatdirectory()
 
-
-#creatdirectory.deletefile()
 

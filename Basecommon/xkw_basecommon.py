@@ -12,6 +12,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 
+
 class XkwBaseUtil:
     def __init__(self):
         self.driver = None
@@ -207,6 +208,31 @@ class XkwBaseUtil:
             return elements
         except Exception as e:
             return [False, '%s' % e]
+        
+    #定位iframe 里面的元素
+    def find_to_iframe_element(self,iframeid,elementid):
+        try:
+            self.driver.switch_to_frame(iframeid)
+            element=self.driver.find_element_by_id(elementid)
+            return element
+        except Exception as e:
+            return [False, '%s' % e]
+        
+    #富文本框输入内容,iframe 存在id属性
+    def iframeid_imput_content(self,iframeid,content):
+        try:
+            js = 'document.getElementById('+iframeid+').contentWindow.document.body.innerHTML="%s"' %(content)
+            self.driver.execute_script(js)
+        except Exception as e :
+            return [False, '%s' % e]
+    
+    #富文本框输入内容,iframe 不存在id属性
+    def iframeclass_imput_content(self,iframeclass,content):
+        try:
+            js="document.getElementsByClassName(\"wind_editor_iframe\")[0].contentWindow.document.body.innerHTML=\"%s\"" %(content)
+            self.driver.execute_script(js)
+        except Exception as e :
+            return [False, '%s' % e]
 
     # 鼠标移动到界面元素上
     def move_to_element(self, element):
@@ -217,6 +243,36 @@ class XkwBaseUtil:
         except Exception as e:
             return [False, '移动操作失败：%s' % e]
 
+    #鼠标悬停显示二级菜单，再通过class属性定位二级菜单界面元素
+    def move_to_element_Locatelement_calss(self,Parent_element,link_text):
+        try:
+            chain = ActionChains(self.driver)
+            chain.move_to_element(Parent_element).perform()
+            element=self.driver.find_element_by_link_text(link_text)
+            return element
+        except Exception as e:
+            [False, '移动操作定位失败：%s' % e]
+
+    #鼠标悬停显示二级菜单，再通过xpath属性定位二级菜单界面元素
+    def move_to_element_Locatelement_xpath(self,Parent_element,Locatelement):
+        try:
+            chain = ActionChains(self.driver)
+            chain.move_to_element(Parent_element).perform()
+            element=self.driver.find_element_by_xpath(Locatelement)
+            return element
+        except Exception as e:
+            [False, '移动操作定位失败：%s' % e]
+
+    #鼠标悬停显示二级菜单，再通过css属性定位二级菜单界面元素
+    def move_to_element_Locatelement_css(self,Parent_element,css_selector):
+        try:
+            chain = ActionChains(self.driver)
+            chain.move_to_element(Parent_element).perform()
+            element=self.driver.find_elements_by_css_selector(css_selector)
+            return element
+        except Exception as e:
+            [False, '移动操作定位失败：%s' % e]
+
     # 拖动滚动条至元素可见
     def scroll_to_element_for_visible(self, element):
         try:
@@ -224,6 +280,17 @@ class XkwBaseUtil:
             return [True, '拖动滚动条至元素可见成功']
         except Exception as e:
             return [False, '拖动滚动条至元素可见失败：%s' % e]
+
+    #执行js脚本
+    def execute_js(self,JS):
+        '''
+                          去掉元素的readonly属性 'document.getElementById("datehome").removeAttribute("readonly");'
+                          直接采用js设定日期'document.getElementById("datehome").value="2019-05-10";'
+        '''
+        try:
+            self.driver.execute_script(JS)
+        except Exception as e:
+            return [False, '执行JS脚本失败：%s' % e]       
 
     #用Js的方式拖动垂直滚动条到底部、顶部：
     def scroll_to_top_or_bottom(self, direction):
@@ -259,7 +326,18 @@ class XkwBaseUtil:
             return [False, '未找到当前页面标题为“%s”的窗口' % title]
         except Exception as e:
             return [False, '%s' % e]
-
+    #切换窗口
+    def switch_windows_handle(self):
+        try:
+            current_handle = self.driver.current_window_handle
+            handles = self.driver.window_handles
+            for handle in handles:
+                if handle !=current_handle:
+                    self.driver.close()
+                    self.driver.switch_to.window(handle)                  
+            return [True, 'success']
+        except Exception as e:
+            return [False, '%s' % e]
 
     # 切换到指定URL的窗口(标题相同的话，按先后顺序取一个)
     def switch_to_window_by_url(self, url):
@@ -287,7 +365,7 @@ class XkwBaseUtil:
         except Exception as e:
             return [False, '%s' % e]
 
-
+    #切换frame
     def switch_to_frame(self, frame):
         try:
             self.driver.switch_to_frame(frame)

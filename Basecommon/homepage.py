@@ -6,6 +6,7 @@ Created on 2019年5月9日
 import configparser
 from Basecommon.xkw_basecommon import xkwBaseUtil
 
+
 class HomePage:
     
     #init data
@@ -14,6 +15,7 @@ class HomePage:
         config.read('..//conf//data.conf', 'utf-8')
         self.MobilePhone=config.get("LoginAccount","MobilePhone")
         self.pwd=config.get("LoginAccount","Password")
+
     
     #login system
     def login(self):
@@ -28,7 +30,7 @@ class HomePage:
         xkwBaseUtil.find_element_by_class_name('psd').clear()
         xkwBaseUtil.find_element_by_class_name('psd').send_keys(self.pwd)
         xkwBaseUtil.find_element_by_id('CommonLogin').submit()
-        xkwBaseUtil.sleep(5)
+        xkwBaseUtil.sleep(2)
     
     #search soucrce
     def search(self,keys):
@@ -36,8 +38,21 @@ class HomePage:
     
     # Random Download of the First Free Document in Mathematics
     def DownloadFile(self):
-        pass
-
-homePage=HomePage()        
-         
+        xkwBaseUtil.get('http://sx.zxxk.com/jc-book554/')
+        xkwBaseUtil.sleep(2)
+        xkwBaseUtil.find_element_by_link_text(u'免费').click()
+        xkwBaseUtil.find_element_by_link_text(u"下载").click()
+        xkwBaseUtil.switch_windows_handle()
+        pagetile = xkwBaseUtil.get_page_title()
+        xkwBaseUtil.find_element_by_xpath('//*[@id="btnSoftDownload"]/div/span[1]').click()
+        xkwBaseUtil.sleep(20)
+        return pagetile.strip(u'-学科网')
+    
+    def getfilename(self):
+        xkwBaseUtil.get('chrome://downloads/')
+        xkwBaseUtil.sleep(5)
+        filename = xkwBaseUtil.find_element_by_id('file-link')
+        print(filename)
+        return filename
         
+homePage=HomePage()
