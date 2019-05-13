@@ -37,16 +37,24 @@ class HomePage:
         pass
     
     # Random Download of the First Free Document in Mathematics
-    def DownloadFile(self):
+    def DownloadFile(self,level):
         xkwBaseUtil.get('http://sx.zxxk.com/jc-book554/')
         xkwBaseUtil.sleep(2)
-        xkwBaseUtil.find_element_by_link_text(u'免费').click()
+        xkwBaseUtil.find_element_by_link_text(level).click()
         xkwBaseUtil.find_element_by_link_text(u"下载").click()
         xkwBaseUtil.switch_windows_handle()
         pagetile = xkwBaseUtil.get_page_title()
         xkwBaseUtil.find_element_by_xpath('//*[@id="btnSoftDownload"]/div/span[1]').click()
         xkwBaseUtil.sleep(20)
-        return pagetile.strip(u'-学科网')
+        try:
+            if level==u'免费':
+                return pagetile.strip(u'-学科网')
+            else:
+                xkwBaseUtil.sleep(5)
+                elementisExists = xkwBaseUtil.is_exist_element('#layui-layer-iframe2')
+                return elementisExists
+        except Exception as e:
+            print(e)
     
     def getfilename(self):
         xkwBaseUtil.get('chrome://downloads/')

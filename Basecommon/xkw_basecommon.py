@@ -374,6 +374,21 @@ class XkwBaseUtil:
             return [False, '%s' % e]
 
 
+    def is_exist_element(self,elem):
+        try:
+                
+            s = self.driver.find_elements_by_css_selector(elem)
+            if len(s) == 0:
+                print("不存在%s元素" % elem)
+                return False 
+            elif len(s) == 1:
+                return True  
+            else:
+                print ("存在%s个元素分别是%s" %(len(s), s))
+                return False
+        except Exception as e:
+            return [False, '%s' % e]
+
     # 截图
     def get_screenshot(self):
         try:

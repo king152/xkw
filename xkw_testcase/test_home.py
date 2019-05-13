@@ -29,20 +29,28 @@ class Mytest(unittest.TestCase):
             print(e)
             raise
     
-    def test_download(self):
-        '''随机下载资源用例'''
-        filename = homePage.DownloadFile()
-        xkwBaseUtil.sleep(10)
-#         downloadfilename = creatdirectory.get_dir_filename()
-        downloadfilename = homePage.getfilename()
+    def test_download_free_file(self):
+        '''下载免费资源第一条资源'''
+        filename = homePage.DownloadFile(u'免费')
+        downloadfilename = creatdirectory.get_dir_filename()
         try:
-            self.assertEqual(filename,downloadfilename)
+            self.assertIn(downloadfilename,filename)
         except Exception as e:
             xkwBaseUtil.get_screenshot()
             print(e)
             xkwBaseUtil.get('http://www.zxxk.com/')
             raise
-    
+
+    def test_download_pay_file(self):
+        '''下载普通资源第一条资源'''
+        Flag = homePage.DownloadFile(u'普通')
+        try:
+            self.assertTrue(Flag)
+        except Exception as e:
+            xkwBaseUtil.get_screenshot()
+            print(e)
+            xkwBaseUtil.get('http://www.zxxk.com/')
+            raise    
     
     @classmethod
     def tearDownClass(cls):
@@ -53,7 +61,8 @@ if __name__ == "__main__":
     current_time = time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime(time.time()))
     testunit = unittest.TestSuite()
     testunit.addTest(Mytest("test_login"))
-    testunit.addTest(Mytest("test_download"))
+    testunit.addTest(Mytest("test_download_free_file"))
+    testunit.addTest(Mytest("test_download_pay_file"))
     report_path = "..\\Report\\xkwTestReport_" + current_time  + '.html'  #生成测试报告的路径
     fp = open(report_path, "wb")
     runner = HTMLTestReport.HTMLTestRunner(stream=fp, title=u"自动化测试报告",description='自动化测试报告',tester='king')
