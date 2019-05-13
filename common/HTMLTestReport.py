@@ -661,8 +661,7 @@ class HTMLTestRunner(Template_mixin):
         result = _TestResult(self.verbosity)
         test(result)
         self.stopTime = datetime.datetime.now()
-        self.generateReport(test, result)
-        print('\nTime Elapsed: %s' % (self.stopTime-self.startTime), file=sys.stderr)
+        self.generateReport(test, result)case      print('\nTime Elapsed: %s' % (self.stopTime-self.startTime), file=sys.stderr)
         return result
 
 
@@ -843,10 +842,10 @@ class HTMLTestRunner(Template_mixin):
             return
 
     def _generate_ending(self):
-        return self.ENDING_TMPL
+        return self.ENcase_TMPL
 
 
-##############################################################################
+##########case################################################################
 # Facilities for running tests from the command line
 ##############################################################################
 

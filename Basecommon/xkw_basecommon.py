@@ -400,5 +400,8 @@ class XkwBaseUtil:
             return [True, '截图成功']
         except Exception as e:
             return [False, '截图失败：%s' % e]
+        
+    def add_img(self):
+        return self.driver.get_screenshot_as_base64()
 
 xkwBaseUtil=XkwBaseUtil()

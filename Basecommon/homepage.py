@@ -12,7 +12,7 @@ class HomePage:
     #init data
     def __init__(self):
         config=configparser.ConfigParser()
-        config.read('..//conf//data.conf', 'utf-8')
+        config.read('E:\\pythonscript\\xkw.zxxk\\conf\\data.conf', 'utf-8')
         self.MobilePhone=config.get("LoginAccount","MobilePhone")
         self.pwd=config.get("LoginAccount","Password")
 
@@ -55,12 +55,6 @@ class HomePage:
                 return elementisExists
         except Exception as e:
             print(e)
-    
-    def getfilename(self):
-        xkwBaseUtil.get('chrome://downloads/')
-        xkwBaseUtil.sleep(5)
-        filename = xkwBaseUtil.find_element_by_id('file-link')
-        print(filename)
-        return filename
+
         
 homePage=HomePage()

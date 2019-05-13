@@ -19,7 +19,7 @@ class Creatdirectory:
         self.pic_directory=time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.filedirectory='../Report/image/'+self.pic_directory
         config=configparser.ConfigParser()
-        config.read('..//conf//data.conf', 'utf-8')
+        config.read('E:\\pythonscript\\xkw.zxxk\\conf\\data.conf', 'utf-8')
         self.deletefiledir=config.get("browserDownloaddir","chromeDownloaddir")
 
     #Check folder exists, no folder creation exists

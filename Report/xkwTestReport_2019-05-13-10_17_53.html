@@ -146,9 +146,9 @@ function html_escape(s) {
 <div   id="main" style="width: 300px;height:300px; float:right;margin-right:300px;margin-top:-80px"></div>
 <h1 style="font-family: Microsoft YaHei">自动化测试报告</h1>
 <p class='attribute'><strong>测试人员 : </strong> king</p>
-<p class='attribute'><strong>开始时间 : </strong> 2019-05-10 17:53:02</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:54.553961</p>
-<p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率= 50.00%</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-05-13 10:17:53</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:01:11.412182</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 3，通过 2，错误 1，通过率= 66.67%</p>
 
 <p class='description'>自动化测试报告</p>
 </div>
@@ -156,14 +156,14 @@ function html_escape(s) {
 
 
 <p id='show_detail_line'>
-<a class="btn btn-primary" href='javascript:showCase(0)'>概要:{ 50.00% }</a>
-<a class="btn btn-warning" href='javascript:showCase(1)' id=''>失败:{ 1 }</a>
-<a class="btn btn-danger" href='javascript:showCase(4)'>错误:{ 0 }</a>
-<a class="btn btn-success" href='javascript:showCase(2)'>通过:{ 1 }</a>
-<a class="btn btn-info" href='javascript:showCase(3)'>所有:{ 2 }</a>
-<input id='fail' type="hidden" value="1"/>
-<input id='error' type="hidden" value="0"/>
-<input id='Pass' type="hidden" value="1"/>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要:{ 66.67% }</a>
+<a class="btn btn-warning" href='javascript:showCase(1)' id=''>失败:{ 0 }</a>
+<a class="btn btn-danger" href='javascript:showCase(4)'>错误:{ 1 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过:{ 2 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有:{ 3 }</a>
+<input id='fail' type="hidden" value="0"/>
+<input id='error' type="hidden" value="1"/>
+<input id='Pass' type="hidden" value="2"/>
 </p>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
@@ -184,13 +184,13 @@ function html_escape(s) {
 	<td>图片</td>
 </tr>
 
-<tr class='failClass warning'>
+<tr class='errorClass warning'>
     <td>Mytest</td>
+    <td class="text-center">3</td>
     <td class="text-center">2</td>
-    <td class="text-center">1</td>
-    <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>Detail</a></td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',3)" class="detail" id='c1'>Detail</a></td>
 	<td></td>
 </tr>
 
@@ -199,45 +199,52 @@ function html_escape(s) {
     <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
 </tr>
 
-<tr id='ft1_2_失败' class='none'>
+<tr id='ft1_2_错误' class='none'>
 	<td  align='center' style="vertical-align:middle">case\test</td>
-    <td class='failCase' style="vertical-align:middle"><div class='testcase'>test_download: 随机下载资源用例</div></td>
+    <td class='errorCase' style="vertical-align:middle"><div class='testcase'>test_download_free_file: 下载免费资源第一条资源</div></td>
     <td colspan='4' align='center'>
     <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>错误</button>
     <div id='div_ft1_2' class="collapse">  -->
 
     <!-- 默认展开错误信息 -Findyou -->
-    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>错误</button>
     <div id='div_ft1_2' class="collapse in" style="text-align:left">
     <pre>
     
-ft1_2: [False, 'Message: no such element: Unable to locate element: {"method":"id","selector":"file-link"}\n  (Session info: chrome=73.0.3683.86)\n  (Driver info: chromedriver=73.0.3683.68 (47787ec04b6e38e22703e856e101e840b65afe72),platform=Windows NT 10.0.10240 x86_64)\n']
-../Report/image/2019-05-10/2019-05-10-17_53_54.png
-'安徽省蚌埠市第一中学2018-2019学年度第二学期期中考试高一数学（理）(无答案）' != [False, 'Message: no such element: Unable[221 chars])\n']
+ft1_2: list index out of range
+../Report/image/2019-05-13/2019-05-13-10_18_31.png
+'in &lt;string&gt;' requires string as left operand, not NoneType
 Traceback (most recent call last):
-  File "E:\pythonscript\xkw.zxxk\xkw_testcase\test_home.py", line 39, in test_download
-    self.assertEqual(filename,downloadfilename)
-AssertionError: '安徽省蚌埠市第一中学2018-2019学年度第二学期期中考试高一数学（理）(无答案）' != [False, 'Message: no such element: Unable[221 chars])\n']
+  File "E:\pythonscript\xkw.zxxk\xkw_testcase\test_home.py", line 37, in test_download_free_file
+    self.assertIn(downloadfilename,filename)
+  File "E:\Program Files\Python37\lib\unittest\case.py", line 1103, in assertIn
+    if member not in container:
+TypeError: 'in &lt;string&gt;' requires string as left operand, not NoneType
 
 
     </pre>
     </div>
     </td>
 	<td align='center'style="vertical-align:middle">
-    <a href="image/2019-05-10/2019-05-10-17_53_54.png" title="image/2019-05-10/2019-05-10-17_53_54.png">  
+    <a href="image/2019-05-13/2019-05-13-10_18_31.png" title="image/2019-05-13/2019-05-13-10_18_31.png">  
     <img src=".\\image\\data.jpg" height=40 width=40 border=0 /></a>
     </td>
 </tr>
 
 
+<tr id='pt1_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_download_pay_file: 下载普通资源第一条资源</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
 <tr id='total_row' class="text-center active">
     <td colspan='1'>总计</td>
+    <td>3</td>
     <td>2</td>
-    <td>1</td>
-    <td>1</td>
     <td>0</td>
-    <td>通过率：50.00%</td>
+    <td>1</td>
+    <td>通过率：66.67%</td>
 	<td></td>
 </tr>
 </table>
