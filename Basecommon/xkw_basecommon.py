@@ -9,6 +9,7 @@ Created on 2019年5月9日
 import time
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+import re
 
 
 
@@ -289,6 +290,14 @@ class XkwBaseUtil:
         '''
         try:
             self.driver.execute_script(JS)
+        except Exception as e:
+            return [False, '执行JS脚本失败：%s' % e]
+        
+    def execute_js_downloadfile(self,JS):
+        try:
+            downfiletitle = self.driver.execute_script(JS)
+            print(downfiletitle)
+            return downfiletitle
         except Exception as e:
             return [False, '执行JS脚本失败：%s' % e]       
 
