@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//Basecommon/autosendmail.py=UTF-8
 encoding//common/log.py=utf-8
 encoding//common/seleniumutil.py=utf-8
 encoding//common/tools.py=utf-8

@@ -47,9 +47,9 @@ class HomePage:
         pagetile = xkwBaseUtil.get_page_title()
         xkwBaseUtil.sleep(5)
         xkwBaseUtil.find_element_by_xpath('//*[@id="btnSoftDownload"]/div/span[1]').click()
-        xkwBaseUtil.sleep(20)
         try:
             if level==u'免费':
+                xkwBaseUtil.sleep(20)
                 return pagetile.strip(u'-学科网')
             else:
                 xkwBaseUtil.sleep(5)
