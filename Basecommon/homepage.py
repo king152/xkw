@@ -5,6 +5,7 @@ Created on 2019年5月9日
 '''
 import configparser
 from Basecommon.xkw_basecommon import xkwBaseUtil
+from test.test_typing import XK
 
 
 class HomePage:
@@ -44,6 +45,7 @@ class HomePage:
         xkwBaseUtil.find_element_by_link_text(u"下载").click()
         xkwBaseUtil.switch_windows_handle()
         pagetile = xkwBaseUtil.get_page_title()
+        xkwBaseUtil.sleep(5)
         xkwBaseUtil.find_element_by_xpath('//*[@id="btnSoftDownload"]/div/span[1]').click()
         xkwBaseUtil.sleep(20)
         try:
