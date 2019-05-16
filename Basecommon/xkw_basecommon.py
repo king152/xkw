@@ -9,6 +9,7 @@ Created on 2019年5月9日
 import time
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+from cgitb import text
 
 
 
@@ -290,7 +291,16 @@ class XkwBaseUtil:
         try:
             self.driver.execute_script(JS)
         except Exception as e:
-            return [False, '执行JS脚本失败：%s' % e]       
+            return [False, '执行JS脚本失败：%s' % e]    
+ 
+    def execute_js_text(self,JS):
+        try:
+            Text = self.driver.execute_script(JS)
+            return Text
+        except Exception as e:
+            return [False, '执行JS脚本失败：%s' % e]     
+       
+       
 
     #用Js的方式拖动垂直滚动条到底部、顶部：
     def scroll_to_top_or_bottom(self, direction):

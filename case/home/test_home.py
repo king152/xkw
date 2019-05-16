@@ -10,10 +10,18 @@ from Basecommon.xkw_basecommon import xkwBaseUtil
 from Basecommon.checkmkdir import creatdirectory
 import unittest
 
+global JS
+
+JS = 'let manager = document.querySelector("downloads-manager").shadowRoot; \
+    let ironList = manager.querySelector("iron-list");\
+    let downloadItem = ironList.querySelector("downloads-item").shadowRoot;\
+    var input=downloadItem.querySelector("#title-area #file-link").innerText;\
+    return input'
+
 class testCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        creatdirectory.deletefile()
+        #creatdirectory.deletefile()
         creatdirectory.checkdirectory()
         cls.imges=[]
     
@@ -31,9 +39,11 @@ class testCase(unittest.TestCase):
     def test_download_free_file(self):
         '''下载免费资源第一条资源'''
         filename = homePage.DownloadFile(u'免费')
-        downloadfilename = creatdirectory.get_dir_filename()
+        xkwBaseUtil.get('chrome://downloads/')
+        xkwBaseUtil.sleep(5)
+        downloadfilename = xkwBaseUtil.execute_js_text(JS)
         try:
-            self.assertIn(downloadfilename,filename)
+            self.assertIn(filename,downloadfilename)
         except Exception as e:
             self.imges.append(xkwBaseUtil.add_img())
             print(e)
