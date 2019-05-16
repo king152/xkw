@@ -32,7 +32,7 @@ class testCase(unittest.TestCase):
         try:
             self.assertEqual(u'学科网-海量中小学教育资源共享平台、权威教学资源门户网站！',pagetitle)
         except Exception as e:
-            self.imges.append(xkwBaseUtil.add_img())
+            xkwBaseUtil.get_screenshot()
             print(e)
             raise
     
@@ -45,7 +45,7 @@ class testCase(unittest.TestCase):
         try:
             self.assertIn(filename,downloadfilename)
         except Exception as e:
-            self.imges.append(xkwBaseUtil.add_img())
+            xkwBaseUtil.get_screenshot()
             print(e)
             xkwBaseUtil.get('http://www.zxxk.com/')
             raise

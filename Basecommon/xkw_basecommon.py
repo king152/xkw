@@ -404,7 +404,7 @@ class XkwBaseUtil:
         try:
             pic_directory=time.strftime("%Y-%m-%d", time.localtime(time.time()))
             current_time = time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime(time.time()))
-            pic_path = '../Report/image/'+pic_directory+'/' + current_time +'.png'
+            pic_path = './Report/image/'+pic_directory+'/' + current_time +'.png'
             self.driver.get_screenshot_as_file(pic_path)
             print(pic_path)
             return [True, '截图成功']

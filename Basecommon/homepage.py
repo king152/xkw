@@ -16,13 +16,13 @@ class HomePage:
         config.read('E:\\pythonscript\\xkw.zxxk\\conf\\data.conf', 'utf-8')
         self.MobilePhone=config.get("LoginAccount","MobilePhone")
         self.pwd=config.get("LoginAccount","Password")
+        xkwBaseUtil.set_driver('谷歌')
+        xkwBaseUtil.maximize_window()
+        xkwBaseUtil.get('http://www.zxxk.com/')
 
     
     #login system
     def login(self):
-        xkwBaseUtil.set_driver('谷歌')
-        xkwBaseUtil.maximize_window()
-        xkwBaseUtil.get('http://www.zxxk.com/')
         xkwBaseUtil.find_element_by_class_name('icon-guanbi').click()
         xkwBaseUtil.find_element_by_class_name('login-btn').click()
         xkwBaseUtil.find_element_by_class_name('lcon-weixin').click()
