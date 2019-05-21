@@ -411,6 +411,15 @@ class XkwBaseUtil:
         except Exception as e:
             return [False, '截图失败：%s' % e]
         
+    def get_save_screenshot(self):
+        try:
+            current_time=time.strftime("%Y-%m-%d", time.localtime(time.time()))
+            pic_path =  current_time +'.png'
+            self.driver.get_screenshot_as_file(pic_path)
+            return pic_path
+        except Exception as e:
+            return [False, '截图失败：%s' % e]
+        
     def add_img(self):
         return self.driver.get_screenshot_as_base64()
 

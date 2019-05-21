@@ -5,7 +5,6 @@ Created on 2019年5月9日
 '''
 import configparser
 from Basecommon.xkw_basecommon import xkwBaseUtil
-from test.test_typing import XK
 
 
 class HomePage:

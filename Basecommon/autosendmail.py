@@ -35,7 +35,7 @@ class Sendmail:
         message['To'] = self.receiver
         message['Subject'] = Header(self.mail_title, 'utf-8')
  
-        # 邮件正文内容
+        # 邮件附件
         #message.attach(MIMEText('学科网自动化回归测试结果', 'plain', 'utf-8'))
         f=open(file,'rb')
         mail_body=f.read()
@@ -47,7 +47,7 @@ class Sendmail:
         msg_html["Content-Disposition"] = 'attachment; filename="TestReport.html"'
         message.attach(msg_html)
          
-        #邮件附件
+        #邮件正文
         att = MIMEText(open(file,'rb').read(),'base64','utf-8')
         att["Content-Type"] = 'application/octet-stream'
         att["Content-Disposition"] = 'attachment; filename='+file
@@ -57,7 +57,7 @@ class Sendmail:
         smtpObj.connect(self.smtpserver,'465')
         smtpObj.login(self.username, self.password)
         smtpObj.sendmail(self.sender, self.receiver, message.as_string())
-        print("邮件发送成功！！！")
+        print("\n邮件发送成功！！！")
         smtpObj.quit()
 
 sendmail=Sendmail()

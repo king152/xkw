@@ -8,6 +8,8 @@ import unittest
 import HTMLTestRunner_cn
 import time
 from Basecommon.autosendmail import sendmail
+from Basecommon.analysisreport  import analysReport
+
 
 
 global report_path
@@ -31,8 +33,12 @@ if __name__ == "__main__":
                                               description="学科网首页自动化回归测试报告，详情见附件", 
                                               stream=fp, 
                                               verbosity=2, 
-                                              retry=1, 
+                                              retry=0, 
                                               save_last_try=True)
     runner.run(all_case())
     fp.close()
-    sendmail.sendEmail(report_path,reportfile)
+    caseflag = analysReport.report(report_path)
+    if caseflag:
+        sendmail.sendEmail(report_path,reportfile)
+    else:
+        print('Test suceessed!')
