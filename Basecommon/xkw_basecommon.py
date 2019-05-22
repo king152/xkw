@@ -414,7 +414,7 @@ class XkwBaseUtil:
     def get_save_screenshot(self):
         try:
             current_time=time.strftime("%Y-%m-%d", time.localtime(time.time()))
-            pic_path =  current_time +'.png'
+            pic_path =  '../pic/'+current_time +'.png'
             self.driver.get_screenshot_as_file(pic_path)
             return pic_path
         except Exception as e:

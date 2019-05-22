@@ -16,7 +16,6 @@ class AnalysReport:
     def report(self,reportname):
         
         try :
-            
             # 打开html文件，读取报告内容
             with open(reportname, "r",encoding='utf-8') as fp:
                 f = fp.read()  # 读报告
