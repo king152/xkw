@@ -28,9 +28,8 @@ Created on 2019年5月17日
 # #     send_onegroup('这是机器人发送的消息。。。。', u'会当凌绝顶')
 #     pass
 
+from Basecommon.weixinalarm import weixinalarm
 
-result =' <p class="attribute"><strong>状态:</strong> <span class="tj passCase">Pass</span>:1 <span class="tj failCase">Failure</span>:1 <span class="tj errorCase">Error</span>:1 <span class="tj">通过率</span>:33.3%</p>'
-if "Failure" in result or "Error" in result :
-    print('*****')
-else:
-    print('#####')
+
+token = weixinalarm.get_token()
+weixinalarm.send_message_text(token, 'test')
