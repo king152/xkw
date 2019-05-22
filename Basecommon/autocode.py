@@ -18,17 +18,19 @@ class AutoIdentifyVerificatCode:
             self.APP_ID=config.get("baiduAi","APP_ID")
             self.API_KEY=config.get("baiduAi","API_KEY")
             self.SECRET_KEY=config.get("baiduAi","SECRET_KEY")
+            self.url = config.get("baiduAi","Mangen_URL")
+            self.ID_Element=config.get("baiduAi","ID_Element")
         except Exception as e:
             print(e) 
         
     def get_VerificatCodepic(self):
         try :
             xkwBaseUtil.set_driver(u'谷歌')
-            xkwBaseUtil.get('http://manage.zxxk.com/MasterLogin.asp')
+            xkwBaseUtil.get(self.url)
             xkwBaseUtil.maximize_window()
             sleep(10)
             imgname = xkwBaseUtil.get_save_screenshot() #截图
-            verifyimg_ele = xkwBaseUtil.find_element_by_id('CheckCodeImg')
+            verifyimg_ele = xkwBaseUtil.find_element_by_id(self.ID_Element)
             left = verifyimg_ele.location['x']
             top = verifyimg_ele.location['y']
             right = verifyimg_ele.location['x']+verifyimg_ele.size['width']
@@ -55,8 +57,7 @@ class AutoIdentifyVerificatCode:
             print(e)
                    
 autocode=AutoIdentifyVerificatCode()
-'''
-调式信息
-autocode.__init__()
-print(autocode.get_code())
-'''
+
+#调式信息
+#autocode.__init__()
+#print(autocode.get_code())
