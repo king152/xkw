@@ -33,7 +33,7 @@ if __name__ == "__main__":
                                               description="学科网首页自动化回归测试报告，详情见附件", 
                                               stream=fp, 
                                               verbosity=2, 
-                                              retry=0, 
+                                              retry=2, 
                                               save_last_try=True)
     runner.run(all_case())
     fp.close()
