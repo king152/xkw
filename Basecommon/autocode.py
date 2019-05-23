@@ -28,7 +28,7 @@ class AutoIdentifyVerificatCode:
             xkwBaseUtil.set_driver(u'谷歌')
             xkwBaseUtil.get(self.url)
             xkwBaseUtil.maximize_window()
-            sleep(10)
+            sleep(20)
             imgname = xkwBaseUtil.get_save_screenshot() #截图
             verifyimg_ele = xkwBaseUtil.find_element_by_id(self.ID_Element)
             left = verifyimg_ele.location['x']
@@ -49,15 +49,19 @@ class AutoIdentifyVerificatCode:
         try:
             self.get_VerificatCodepic()
             img = self.get_file_content('../pic/verifyimage.png')
-            code=AipOcr(self.APP_ID, self.API_KEY, self.SECRET_KEY).basicGeneral(img)
+            code=AipOcr(self.APP_ID, self.API_KEY, self.SECRET_KEY).basicAccurate(img)
             result_list = str(code['words_result'])
             result_str = result_list[12:16]
-            return int(result_str)
+            print(result_list)
+            return result_str
         except Exception as e:
             print(e)
-                   
-autocode=AutoIdentifyVerificatCode()
+    def login(self):
+        xkwBaseUtil.find_element_by_name('UserName').send_keys('125522')
+        xkwBaseUtil.find_element_by_name()              
+
+autocode=AutoIdentifyVerificatCode() 
 
 #调式信息
-#autocode.__init__()
-#print(autocode.get_code())
+# autocode.__init__()
+# print(autocode.get_code())

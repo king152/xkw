@@ -25,17 +25,18 @@ class weixinAlarm:
             print(e)
 
 
-    def send_message_text(self,token, msg):
+    def send_message_text(self,msg):
         try:
+            self.token = self.get_token()
             values = {
-            "touser": '@all',
-            "msgtype": 'text',
-            "agentid": 1000002, 
-            "text": {'content': msg},
-            "safe": 0
-            }
+                "touser": '@all',
+                "msgtype": 'text',
+                "agentid": 1000002, 
+                "text": {'content': msg},
+                "safe": 0
+                }
             msges=(bytes(json.dumps(values), 'utf-8'))
-            send_url = '%s/cgi-bin/message/send?access_token=%s' % (self.url,token)
+            send_url = '%s/cgi-bin/message/send?access_token=%s' % (self.url,self.token)
             respone=urllib.request.urlopen(urllib.request.Request(url=send_url, data=msges)).read()
             x = json.loads(respone.decode())['errcode']
             if x == 0:

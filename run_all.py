@@ -9,6 +9,7 @@ import HTMLTestRunner_cn
 import time
 from Basecommon.autosendmail import sendmail
 from Basecommon.analysisreport  import analysReport
+from Basecommon.weixinalarm import weixinalarm
 
 
 
@@ -40,5 +41,6 @@ if __name__ == "__main__":
     caseflag = analysReport.report(report_path)
     if caseflag:
         sendmail.sendEmail(report_path,reportfile)
+        weixinalarm.send_message_text('存在用例执行失败，发送微信报警')
     else:
         print('Test suceessed!')
