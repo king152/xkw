@@ -50,6 +50,26 @@ class testuserCase(unittest.TestCase):
             print(e)
             raise
     
+    def test_evaluate_01(self):
+        '''提交带评论内容的评价'''
+        content = userinfo.evaluate(u'资源非常不错，结构清晰，排版漂亮')
+        try:
+            self.assertEqual(content, u'评价成功，您的评论内容将在审核通过后显示！')
+        except Exception as e:
+            xkwBaseUtil.get_screenshot()
+            print(e)
+            raise
+    
+    def test_evaluate_02(self):
+        '''提交无评论内容的评价'''
+        content = userinfo.evaluate('')
+        try:
+            self.assertEqual(content, u'评价成功！')
+        except Exception as e:
+            xkwBaseUtil.get_screenshot()
+            print(e)
+            raise
+    
     @classmethod
     def tearDownClass(cls):
         pass

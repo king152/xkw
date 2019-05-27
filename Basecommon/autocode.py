@@ -30,7 +30,7 @@ class AutoIdentifyVerificatCode:
             xkwBaseUtil.maximize_window()
             sleep(20)
             imgname = xkwBaseUtil.get_save_screenshot() #截图
-            verifyimg_ele = xkwBaseUtil.find_element_by_id(self.ID_Element)
+            verifyimg_ele = xkwBaseUtil.find_element_by_class_name(self.ID_Element)
             left = verifyimg_ele.location['x']
             top = verifyimg_ele.location['y']
             right = verifyimg_ele.location['x']+verifyimg_ele.size['width']
@@ -55,10 +55,7 @@ class AutoIdentifyVerificatCode:
             print(result_list)
             return result_str
         except Exception as e:
-            print(e)
-    def login(self):
-        xkwBaseUtil.find_element_by_name('UserName').send_keys('125522')
-        xkwBaseUtil.find_element_by_name()              
+            print(e)            
 
 autocode=AutoIdentifyVerificatCode() 
 

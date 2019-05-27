@@ -9,7 +9,8 @@ Created on 2019年5月9日
 import time
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
-from cgitb import text
+from PIL import Image
+from aip import AipOcr
 
 
 
@@ -234,7 +235,28 @@ class XkwBaseUtil:
             self.driver.execute_script(js)
         except Exception as e :
             return [False, '%s' % e]
-
+        
+    #接收警告框
+    def alert_accept(self):
+        try:
+            self.driver.switch_to_alert().accept()
+        except Exception as e :
+            return [False, '%s' % e]
+    
+    #获取警告框的文本
+    def get_alert_content(self):
+        try:
+            return self.driver.switch_to_alert().text
+        except Exception as e :
+            return [False, '%s' % e]
+    
+    #获取警告框的文本
+    def dismiss_alert(self):
+        try:
+            self.driver.switch_to_alert().dismiss()
+        except Exception as e :
+            return [False, '%s' % e]
+    
     # 鼠标移动到界面元素上
     def move_to_element(self, element):
         try:
@@ -376,14 +398,58 @@ class XkwBaseUtil:
             return [False, '%s' % e]
 
     #切换frame
-    def switch_to_frame(self, frame):
+    def switch_to_frame(self, type,idelement):
         try:
-            self.driver.switch_to_frame(frame)
+            if type=='id':
+                Frame = self.driver.find_element_by_id(idelement)
+                self.driver.switch_to_frame(Frame)
+            elif type == 'name':
+                Frame = self.driver.find_element_by_name(idelement)
+                self.driver.switch_to_frame(Frame)
+            elif type=='tag':
+                Frame = self.driver.find_element_by_tag_name(idelement)
+                self.driver.switch_to_frame(Frame)
+            else:
+                print('定位方式传参错误！')
             return [True, 'success']
         except Exception as e:
             return [False, '%s' % e]
-
-
+        
+    #退出iframe
+    def logout_iframe(self):
+        try:
+            self.driver.switch_to_default_content()
+        except Exception as e:
+            return [False, '%s' % e]
+    
+    def get_file_content(self,filePath):
+        with open(filePath, 'rb') as fp:
+            return fp.read()    
+    
+    def get_VerificatCodepic(self,class_Element):
+        try :
+            APP_ID='16315444'
+            API_KEY='CVx0Yc9PMsvOLcl9rhaahuBm'
+            SECRET_KEY='LRVBwgRoewNDPapSy08LrCHwUhtAvCxh'
+            imgname = self.get_save_screenshot() #截图
+            verifyimg_ele = xkwBaseUtil.find_element_by_class_name(class_Element)
+            left = verifyimg_ele.location['x']
+            top = verifyimg_ele.location['y']
+            right = verifyimg_ele.location['x']+verifyimg_ele.size['width']
+            bottom = verifyimg_ele.location['y']+verifyimg_ele.size['height']
+            img = Image.open(imgname)
+            img = img.crop((left-2,top-4,right+2,bottom+4))
+            img.save('../pic/verifyimage.png')
+            img = self.get_file_content('../pic/verifyimage.png')
+            code=AipOcr(APP_ID, API_KEY, SECRET_KEY).basicAccurate(img)
+            result_list = str(code['words_result'])
+            result_str = result_list[12:16]
+            print(result_list)
+            return result_str
+        except Exception as e:
+            print(e)
+    
+    #判断元素是否存在
     def is_exist_element(self,elem):
         try:
                 
