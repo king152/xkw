@@ -10,6 +10,7 @@ import time
 from Basecommon.autosendmail import sendmail
 from Basecommon.analysisreport  import analysReport
 from Basecommon.weixinalarm import weixinalarm
+from Basecommon.xkw_basecommon import xkwBaseUtil
 
 
 
@@ -34,13 +35,15 @@ if __name__ == "__main__":
                                               description="学科网首页自动化回归测试报告，详情见附件", 
                                               stream=fp, 
                                               verbosity=2, 
-                                              retry=2, 
+                                              retry=0, 
                                               save_last_try=True)
     runner.run(all_case())
     fp.close()
+    xkwBaseUtil.close()
     caseflag = analysReport.report(report_path)
     if caseflag:
         sendmail.sendEmail(report_path,reportfile)
         weixinalarm.send_message_text('存在用例执行失败，发送微信报警')
     else:
         print('Test suceessed!')
+    

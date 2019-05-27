@@ -22,7 +22,7 @@ class AnalysReport:
             soup = BeautifulSoup(f, "html.parser")
             status = soup.find_all(class_="attribute")
             result = status[2]
-            flag = "Failure" in result or "Error" in str(result)
+            flag = "Failure" in str(result) or "Error" in str(result)
             if flag:
                 print("\n***存在失败或者错误用例执行结果！，正在发送邮件*****")
                 return True

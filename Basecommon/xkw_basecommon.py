@@ -422,5 +422,24 @@ class XkwBaseUtil:
         
     def add_img(self):
         return self.driver.get_screenshot_as_base64()
+    
+    def scrollelment(self,type,elment):
+        try:
+            if type == 'id':
+                target = self.driver.find_element_by_id(elment)
+                self.driver.execute_script("arguments[0].scrollIntoView();", target)
+            elif type =='class':
+                target = self.driver.find_element_by_class_name(elment)
+                self.driver.execute_script("arguments[0].scrollIntoView();", target)
+            elif type == 'xpath':
+                target = self.driver.find_element_by_xpath(elment)
+                self.driver.execute_script("arguments[0].scrollIntoView();", target)
+            elif type == 'name':
+                target = self.driver.find_element_by_name(elment)
+                self.driver.execute_script("arguments[0].scrollIntoView();", target)
+            else:
+                print('目前只支持 id name class xpath方式')
+        except Exception as e:
+            return [False, '移动失败：%s' % e]
 
 xkwBaseUtil=XkwBaseUtil()

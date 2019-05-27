@@ -25,7 +25,7 @@ class testCase(unittest.TestCase):
         creatdirectory.checkdirectory()
         cls.imges=[]
     
-    def test_01(self):
+    def test_01_logon(self):
         '''正常登录成功用例场景'''
         homePage.login()
         pagetitle=xkwBaseUtil.get_page_title()
@@ -36,7 +36,7 @@ class testCase(unittest.TestCase):
             print(e)
             raise
     
-    def test_download_free_file(self):
+    def test_download_free_file_02(self):
         '''下载免费资源第一条资源'''
         filename = homePage.DownloadFile(u'免费')
         xkwBaseUtil.get('chrome://downloads/')
@@ -50,20 +50,21 @@ class testCase(unittest.TestCase):
             xkwBaseUtil.get('http://www.zxxk.com/')
             raise
 
-    def test_download_pay_file(self):
+    def test_download_pay_file_03(self):
         '''下载普通资源第一条资源'''
         Flag = homePage.DownloadFile(u'普通')
         try:
             self.assertTrue(Flag)
         except Exception as e:
-            self.imges.append(xkwBaseUtil.add_img())
+            xkwBaseUtil.get_screenshot()
             print(e)
             xkwBaseUtil.get('http://www.zxxk.com/')
             raise    
     
     @classmethod
     def tearDownClass(cls):
-        xkwBaseUtil.close()
+        pass
+        #xkwBaseUtil.close()
 
 if __name__ == "__main__":
     unittest.main()
