@@ -481,7 +481,9 @@ class XkwBaseUtil:
         try:
             current_time=time.strftime("%Y-%m-%d", time.localtime(time.time()))
             pic_path =  '../pic/'+current_time +'.png'
+            print('**开始截图***')
             self.driver.get_screenshot_as_file(pic_path)
+            print('*截图完成****')
             return pic_path
         except Exception as e:
             return [False, '截图失败：%s' % e]

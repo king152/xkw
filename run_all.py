@@ -6,7 +6,7 @@ Created on 2019年5月16日
 # coding:utf-8
 import unittest
 import HTMLTestRunner_cn
-import time
+import time,os
 from Basecommon.autosendmail import sendmail
 from Basecommon.analysisreport  import analysReport
 from Basecommon.weixinalarm import weixinalarm
@@ -20,8 +20,8 @@ global case_path
 now=time.strftime("%Y-%m-%d_%H_%M_%S")
 reportfile = '学科网自动化回归_'+now+'_result.html'
 report_path = './Report/'+ reportfile #报告路径
-case_path='./case/'  #用例路径
-
+case_path=os.path.join(os.getcwd(),'case')  #用例路径
+print(case_path)
 #discover组装用例
 def all_case():
     discover = unittest.defaultTestLoader.discover(case_path,
@@ -46,4 +46,5 @@ if __name__ == "__main__":
         weixinalarm.send_message_text('存在用例执行失败，发送微信报警')
     else:
         print('Test suceessed!')
+
     

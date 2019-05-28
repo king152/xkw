@@ -18,14 +18,15 @@ JS = 'let manager = document.querySelector("downloads-manager").shadowRoot; \
     var input=downloadItem.querySelector("#title-area #file-link").innerText;\
     return input'
 
-class testCase(unittest.TestCase):
+class testdownloadCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        print('下载资源case开始执行')
         #creatdirectory.deletefile()
         creatdirectory.checkdirectory()
         cls.imges=[]
     
-    def test_01_logon(self):
+    def test_01(self):
         '''正常登录成功用例场景'''
         homePage.login()
         pagetitle=xkwBaseUtil.get_page_title()
@@ -36,7 +37,7 @@ class testCase(unittest.TestCase):
             print(e)
             raise
     
-    def test_download_free_file_02(self):
+    def test_02(self):
         '''下载免费资源第一条资源'''
         filename = homePage.DownloadFile(u'免费')
         xkwBaseUtil.get('chrome://downloads/')
@@ -50,7 +51,7 @@ class testCase(unittest.TestCase):
             xkwBaseUtil.get('http://www.zxxk.com/')
             raise
 
-    def test_download_pay_file_03(self):
+    def test_03(self):
         '''下载普通资源第一条资源'''
         Flag = homePage.DownloadFile(u'普通')
         try:
@@ -63,7 +64,7 @@ class testCase(unittest.TestCase):
     
     @classmethod
     def tearDownClass(cls):
-        pass
+        print('下载资源case执行完成')
         #xkwBaseUtil.close()
 
 if __name__ == "__main__":

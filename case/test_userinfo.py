@@ -12,9 +12,9 @@ import unittest
 class testuserCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        pass
-    
-    def test_01_signin(self):
+        print('用户中心case开始执行')
+     
+    def test_100(self):
         '''签到成功，验证学豆'''
         beforebean = userinfo.getbean()
         userinfo.signin()
@@ -27,7 +27,7 @@ class testuserCase(unittest.TestCase):
             print(e)
             raise
     
-    def test_clonk_05(self):
+    def test_1001(self):
         '''打卡成功，验证打卡学豆'''
         beforebean = userinfo.getbean()
         userinfo.clock()
@@ -40,7 +40,7 @@ class testuserCase(unittest.TestCase):
             print(e)
             raise
         
-    def test_clonk_06(self):
+    def test_1002(self):
         ''' 打卡成功，验证打卡进度'''
         clonkreslut = userinfo.clockresult()
         try:
@@ -50,7 +50,7 @@ class testuserCase(unittest.TestCase):
             print(e)
             raise
     
-    def test_evaluate_01(self):
+    def test_1003(self):
         '''提交带评论内容的评价'''
         content = userinfo.evaluate(u'资源非常不错，结构清晰，排版漂亮')
         try:
@@ -60,7 +60,7 @@ class testuserCase(unittest.TestCase):
             print(e)
             raise
     
-    def test_evaluate_02(self):
+    def test_1004(self):
         '''提交无评论内容的评价'''
         content = userinfo.evaluate('')
         try:
@@ -72,7 +72,7 @@ class testuserCase(unittest.TestCase):
     
     @classmethod
     def tearDownClass(cls):
-        pass
+        print('用户中心case执行完毕')
  
 if __name__ == "__main__":
     unittest.main()       

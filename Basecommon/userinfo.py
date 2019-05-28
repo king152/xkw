@@ -5,8 +5,7 @@ Created on 2019年5月27日
 '''
 from Basecommon.xkw_basecommon import xkwBaseUtil
 from Basecommon.homepage import homePage
-from Basecommon.autocode import autocode
-from test.test_typing import XK
+
 
 class UserInfo:
     def __init__(self):
@@ -107,12 +106,5 @@ class UserInfo:
         xkwBaseUtil.find_element_by_class_name('send').click()
         xkwBaseUtil.sleep(3)
         content = xkwBaseUtil.find_element_by_class_name('cover-email').text
-        return content
-        
-               
-
+        return content                    
 userinfo = UserInfo()
-homePage.login()
-print(userinfo.bindemail())
-
-
