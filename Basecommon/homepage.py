@@ -3,6 +3,7 @@ Created on 2019年5月9日
 @author: king
 @job number:xy04952
 '''
+# -*- coding:utf-8 -*-
 import configparser
 from Basecommon.xkw_basecommon import xkwBaseUtil
 
@@ -22,7 +23,7 @@ class HomePage:
     
     #login system
     def login(self):
-        xkwBaseUtil.find_element_by_class_name('icon-guanbi').click()
+        #xkwBaseUtil.find_element_by_class_name('icon-guanbi').click()
         xkwBaseUtil.find_element_by_class_name('login-btn').click()
         xkwBaseUtil.find_element_by_class_name('lcon-weixin').click()
         xkwBaseUtil.find_element_by_id('username').clear()
@@ -58,4 +59,3 @@ class HomePage:
             print(e)
         
 homePage=HomePage()
-

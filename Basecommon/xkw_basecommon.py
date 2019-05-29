@@ -11,6 +11,7 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from PIL import Image
 from aip import AipOcr
+from selenium.webdriver.support.select import Select
 
 
 
@@ -206,7 +207,7 @@ class XkwBaseUtil:
     # 根据标签class name查找，查找多个
     def find_element_by_class_names(self, class_name):
         try:
-            elements = self.driver.find_element_by_class_name(class_name)
+            elements = self.driver.find_elements_by_class_name(class_name)
             return elements
         except Exception as e:
             return [False, '%s' % e]
@@ -250,7 +251,7 @@ class XkwBaseUtil:
         except Exception as e :
             return [False, '%s' % e]
     
-    #获取警告框的文本
+    #点击警告框的取消按钮
     def dismiss_alert(self):
         try:
             self.driver.switch_to_alert().dismiss()
@@ -295,6 +296,22 @@ class XkwBaseUtil:
             return element
         except Exception as e:
             [False, '移动操作定位失败：%s' % e]
+    
+    #定位select下拉框        
+    def find_select(self,listelement,childselectelement):
+        try:
+            self.driver.find_element_by_xpath(listelement).click()
+            self.driver.find_element_by_xpath(childselectelement).click()
+        except Exception as e:
+            [False, '定位失败：%s' % e]
+    
+    #通过Select模块定位
+    def find_by_select_xpath(self,listelement):
+        try:
+            text = self.driver.find_element_by_xpath(listelement)
+            Select(text).select_by_index(2)
+        except Exception as e:
+            [False, '定位失败：%s' % e]
 
     # 拖动滚动条至元素可见
     def scroll_to_element_for_visible(self, element):
@@ -307,8 +324,8 @@ class XkwBaseUtil:
     #执行js脚本
     def execute_js(self,JS):
         '''
-                          去掉元素的readonly属性 'document.getElementById("datehome").removeAttribute("readonly");'
-                          直接采用js设定日期'document.getElementById("datehome").value="2019-05-10";'
+        #去掉元素的readonly属性 'document.getElementById("datehome").removeAttribute("readonly");'
+        #直接采用js设定日期'document.getElementById("datehome").value="2019-05-10";'
         '''
         try:
             self.driver.execute_script(JS)
@@ -398,16 +415,16 @@ class XkwBaseUtil:
             return [False, '%s' % e]
 
     #切换frame
-    def switch_to_frame(self, type,idelement):
+    def switch_to_frame(self, type,element):
         try:
             if type=='id':
-                Frame = self.driver.find_element_by_id(idelement)
+                Frame = self.driver.find_element_by_id(element)
                 self.driver.switch_to_frame(Frame)
             elif type == 'name':
-                Frame = self.driver.find_element_by_name(idelement)
+                Frame = self.driver.find_element_by_name(element)
                 self.driver.switch_to_frame(Frame)
             elif type=='tag':
-                Frame = self.driver.find_element_by_tag_name(idelement)
+                Frame = self.driver.find_element_by_tag_name(element)
                 self.driver.switch_to_frame(Frame)
             else:
                 print('定位方式传参错误！')
@@ -490,8 +507,23 @@ class XkwBaseUtil:
         
     def add_img(self):
         return self.driver.get_screenshot_as_base64()
-    
+    def scrollElment(self,target):
+        '''
+        Features：移动页面到元素可见
+        parameter：target 元素定位返回
+        '''
+        try:
+            self.driver.execute_script("arguments[0].scrollIntoView();", target)
+        except Exception as e:
+            [False, '移动失败：%s' % e]
+            
+            
     def scrollelment(self,type,elment):
+        '''
+        Features：移动页面到元素可见
+        parameter：type 定位方式类型,elment 元素定位
+        '''
+        
         try:
             if type == 'id':
                 target = self.driver.find_element_by_id(elment)
